@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facultăți - UniRunUp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .faculties-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+        }
+
+        .faculties-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .faculties-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-section {
+            padding: 60px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-btn {
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .faculties-section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .faculties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .faculty-card {
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .faculty-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+
+        .faculty-logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .faculty-content {
+            padding: 2rem;
+        }
+
+        .faculty-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .faculty-features {
+            margin: 1.5rem 0;
+        }
+
+        .faculty-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faculty-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faculty-features i {
+            color: var(--accent-color);
+        }
+
+        .faculty-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-outline {
+            flex: 1;
+            padding: 12px 24px;
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .faculties-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .faculties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faculty-cta {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">UniRunUp</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="despre.html" class="nav-link">Despre Noi</a></li>
+                <li><a href="functionalitati.html" class="nav-link">Funcționalități</a></li>
+                <li><a href="facultati.html" class="nav-link active">Facultăți</a></li>
+                <li><a href="activitati.html" class="nav-link">Activități</a></li>
+                <li><a href="preturi.html" class="nav-link">Prețuri</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn-secondary">Conectează-te</a>
+                <a href="#" class="btn-primary">Încearcă gratuit</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="faculties-hero">
+        <div class="container">
+            <h1>Explorează Facultățile</h1>
+            <p>Descoperă peste 200 de facultăți din România și străinătate. Compară, analizează și alege cea mai potrivită pentru tine.</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Caută facultăți după nume, domeniu sau oraș...">
+                    <button class="search-btn"><i class="fas fa-search"></i> Caută</button>
+                </div>
+                <div class="filters">
+                    <button class="filter-btn active">Toate</button>
+                    <button class="filter-btn">Tehnică</button>
+                    <button class="filter-btn">Medicină</button>
+                    <button class="filter-btn">Economie</button>
+                    <button class="filter-btn">Drept</button>
+                    <button class="filter-btn">Arte</button>
+                    <button class="filter-btn">Științe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculties Section -->
+    <section class="faculties-section">
+        <div class="container">
+            <div class="faculties-grid">
+                <!-- Universitatea București -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Universitatea din București</h3>
+                        <p>Facultatea de Matematică și Informatică</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">8.5</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2500</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Specializări în IT și matematică aplicată</li>
+                                <li><i class="fas fa-check"></i> Parteneriate cu companii tech</li>
+                                <li><i class="fas fa-check"></i> Laboratoare moderne</li>
+                                <li><i class="fas fa-check"></i> Programe de internship</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Politehnica București -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Universitatea Politehnica București</h3>
+                        <p>Facultatea de Automatică și Calculatoare</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">9.2</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3000</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Top 1 în inginerie din România</li>
+                                <li><i class="fas fa-check"></i> Cercetare de vârf</li>
+                                <li><i class="fas fa-check"></i> Conexiuni internaționale</li>
+                                <li><i class="fas fa-check"></i> Rate mari de angajare</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASE București -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Academia de Studii Economice</h3>
+                        <p>Facultatea de Cibernetică, Statistică și Informatică Economică</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">8.0</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2800</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Business și tehnologie</li>
+                                <li><i class="fas fa-check"></i> Programe MBA</li>
+                                <li><i class="fas fa-check"></i> Networking puternic</li>
+                                <li><i class="fas fa-check"></i> Stagii în corporații</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMF Carol Davila -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>UMF Carol Davila</h3>
+                        <p>Facultatea de Medicină</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">9.8</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">6 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5000</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Cea mai prestigioasă facultate de medicină</li>
+                                <li><i class="fas fa-check"></i> Spitale universitare moderne</li>
+                                <li><i class="fas fa-check"></i> Cercetare medicală avansată</li>
+                                <li><i class="fas fa-check"></i> Recunoaștere internațională</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Universitatea Babeș-Bolyai -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Universitatea Babeș-Bolyai</h3>
+                        <p>Facultatea de Psihologie și Științele Educației</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">7.5</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2200</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Programe acreditate internațional</li>
+                                <li><i class="fas fa-check"></i> Practică în instituții de top</li>
+                                <li><i class="fas fa-check"></i> Cercetare în psihologie aplicată</li>
+                                <li><i class="fas fa-check"></i> Comunitate academică diversă</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Universitatea de Arte -->
+                <div class="faculty-card">
+                    <div class="faculty-header">
+                        <div class="faculty-logo">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Universitatea Națională de Arte</h3>
+                        <p>Facultatea de Arte Vizuale</p>
+                    </div>
+                    <div class="faculty-content">
+                        <div class="faculty-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">7.0</span>
+                                <span class="stat-label">Nota admitere</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4 ani</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1800</span>
+                                <span class="stat-label">Lei/an</span>
+                            </div>
+                        </div>
+                        <div class="faculty-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Ateliere și studiouri moderne</li>
+                                <li><i class="fas fa-check"></i> Profesori artiști recunoscuți</li>
+                                <li><i class="fas fa-check"></i> Expoziții și evenimente culturale</li>
+                                <li><i class="fas fa-check"></i> Colaborări cu muzee și galerii</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Compară</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Nu găsești facultatea potrivită?</h2>
+                <p>Folosește testul nostru vocațional pentru recomandări personalizate</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary large">Fă testul vocațional</a>
+                    <a href="functionalitati.html" class="btn-secondary large">Vezi toate funcționalitățile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma care te ghidează către facultatea potrivită pentru tine.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platformă</h4>
+                    <ul>
+                        <li><a href="functionalitati.html">Funcționalități</a></li>
+                        <li><a href="preturi.html">Prețuri</a></li>
+                        <li><a href="facultati.html">Facultăți</a></li>
+                        <li><a href="activitati.html">Activități</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suport</h4>
+                    <ul>
+                        <li><a href="#">Ajutor</a></li>
+                        <li><a href="chat.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ghiduri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termeni și condiții</a></li>
+                        <li><a href="#">Politica de confidențialitate</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

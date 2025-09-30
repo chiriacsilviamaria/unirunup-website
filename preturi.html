@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prețuri și Abonamente - UniRunUp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-accent: #667eea;
+            --bg-secondary:#b2cff6;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+        }
+
+        .pricing-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+        }
+
+        .pricing-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .pricing-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: var(--border-color);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background-color: var(--primary-color);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .billing-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .billing-label.active {
+            color: var(--primary-color);
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, var(--accent-color), #10B981);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .pricing-section {
+            padding: 80px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Media query pentru mobile - cardurile se vor înfășura pe ecrane mici */
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .pricing-card {
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .pricing-card.recommended {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.recommended:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 0 0 20px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .pricing-header {
+            padding: 2.5rem 2rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2); /* Gradient violet-albastru pentru default */
+            color: white; /* Fac textul alb pentru contrast */
+        }
+
+        /* Fond specific pentru planul Gratuit (primul card) - Tonuri de albastru deschis */
+        .pricing-card:nth-child(1) .pricing-header {
+            background: linear-gradient(135deg, #3B82F6, #1E40AF); /* Gradient albastru deschis spre închis */
+            color: white;
+        }
+
+        /* Fond specific pentru planul Premium Lunar (al doilea card - recommended) - Tonuri de auriu */
+        .pricing-card.recommended .pricing-header {
+            background: linear-gradient(135deg, #F59E0B, #D97706); /* Gradient auriu spre portocaliu auriu */
+            color: white;
+        }
+
+        /* Fond specific pentru planul Premium Anual (al treilea card) - Tonuri de albastru închis */
+        .pricing-card:nth-child(3) .pricing-header {
+            background: linear-gradient(135deg, #1E3A8A, #0F172A); /* Gradient albastru închis spre navy */
+            color: white;
+        }
+
+        /* Fac toate textele din header albe pentru contrast */
+        .pricing-header .plan-name {
+            color: white;
+        }
+
+        .pricing-header .plan-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .pricing-card.recommended .plan-name {
+            color: white;
+        }
+
+        .plan-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card.recommended .plan-description {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .price-container {
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white; /* Schimb culoarea în alb */
+        }
+
+        /* Culori diferite pentru fiecare plan de prețuri - toate albe acum */
+        .pricing-card:nth-child(1) .price {
+            color: white; /* Alb pentru planul gratuit */
+        }
+
+        .pricing-card:nth-child(2) .price {
+            color: white; /* Alb pentru planul premium lunar */
+        }
+
+        .pricing-card:nth-child(3) .price {
+            color: white; /* Alb pentru planul premium anual */
+        }
+
+        .pricing-card.recommended .price {
+            color: white;
+        }
+
+        .price-currency {
+            font-size: 3rem; /* Fac suma la fel de mare ca textul 'lei' */
+            vertical-align: baseline; /* Aliniez pe aceeași linie */
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-card.recommended .price-period {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-features {
+            padding: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .features-list li i {
+            color: var(--accent-color);
+            margin-right: 1rem;
+            font-size: 1rem;
+            width: 16px;
+        }
+
+        .features-list li.unavailable {
+            color: var(--text-light);
+        }
+
+        .features-list li.unavailable i {
+            color: var(--text-light);
+        }
+
+        .pricing-cta {
+            padding: 0 2rem 2rem;
+        }
+
+        .pricing-cta .btn-primary,
+        .pricing-cta .btn-secondary {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .faq-section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-icon {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .guarantee-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--accent-color), #10B981);
+            color: white;
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .pricing-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.recommended {
+                transform: none;
+            }
+
+            .pricing-card.recommended:hover {
+                transform: translateY(-5px);
+            }
+
+            .billing-toggle {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">UniRunUp</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="despre.html" class="nav-link">Despre Noi</a></li>
+                <li><a href="functionalitati.html" class="nav-link">Funcționalități</a></li>
+                <li><a href="facultati.html" class="nav-link">Facultăți</a></li>
+                <li><a href="activitati.html" class="nav-link">Activități</a></li>
+                <li><a href="preturi.html" class="nav-link active">Prețuri</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn-secondary">Conectează-te</a>
+                <a href="#" class="btn-primary">Încearcă gratuit</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <h1>Planuri și Prețuri</h1>
+            <p>Alege planul potrivit pentru tine și începe să-ți construiești viitorul academic cu încredere.</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Plan Gratuit -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Gratuit</h3>
+                        <p class="plan-description">Perfect pentru a începe explorarea</p>
+                        <div class="price-container">
+                            <span class="price">
+                                <span class="price-currency">0</span> lei
+                            </span>
+                            <div class="price-period">pentru totdeauna</div>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Test vocațional complet</li>
+                            <li><i class="fas fa-check"></i> Acces la baza de date cu facultăți</li>
+                            <li><i class="fas fa-check"></i> Comparare până la 3 facultăți</li>
+                            <li><i class="fas fa-check"></i> Ghiduri generale de admitere</li>
+                            <li><i class="fas fa-check"></i> Chat cu AI pentru întrebări de bază</li>
+                            <li class="unavailable"><i class="fas fa-times"></i> Consiliere personalizată</li>
+                            <li class="unavailable"><i class="fas fa-times"></i> Acces la voluntariate premium</li>
+                            <li class="unavailable"><i class="fas fa-times"></i> Servicii de traducere</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn-secondary">Începe gratuit</a>
+                    </div>
+                </div>
+
+                <!-- Plan Premium Lunar -->
+                <div class="pricing-card recommended">
+                    <div class="recommended-badge">Recomandat</div>
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Premium Lunar</h3>
+                        <p class="plan-description">Soluția completă pentru admitere</p>
+                        <div class="price-container">
+                            <span class="price">
+                                <span class="price-currency">100</span> lei
+                            </span>
+                            <div class="price-period">pe lună</div>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Toate funcționalitățile gratuite</li>
+                            <li><i class="fas fa-check"></i> Consiliere 1-on-1 cu studenți</li>
+                            <li><i class="fas fa-check"></i> Acces la toate voluntariatele</li>
+                            <li><i class="fas fa-check"></i> Ghid personalizat pas cu pas</li>
+                            <li><i class="fas fa-check"></i> Servicii de traducere (preț redus)</li>
+                            <li><i class="fas fa-check"></i> Meditații personalizate (preț redus)</li>
+                            <li><i class="fas fa-check"></i> Comparare nelimitată de facultăți</li>
+                            <li><i class="fas fa-check"></i> Suport prioritar</li>
+                            <li><i class="fas fa-check"></i> Sesiuni de pregătire pentru interviuri</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn-primary">Abonează-te lunar</a>
+                    </div>
+                </div>
+
+                <!-- Plan Premium Anual -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Premium Anual</h3>
+                        <p class="plan-description">Soluția completă pentru tot anul</p>
+                        <div class="price-container">
+                            <span class="price">
+                                <span class="price-currency">1000</span> lei
+                            </span>
+                            <div class="price-period">pe an</div>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> Toate funcționalitățile Premium</li>
+                            <li><i class="fas fa-check"></i> Consiliere nelimitată</li>
+                            <li><i class="fas fa-check"></i> Servicii de traducere (preț redus)</li>
+                            <li><i class="fas fa-check"></i> Meditații personalizate (preț redus)</li>
+                            <li><i class="fas fa-check"></i> Aplicare asistată la facultăți</li>
+                            <li><i class="fas fa-check"></i> Revizuire completă a dosarului</li>
+                            <li><i class="fas fa-check"></i> Pregătire pentru examene de admitere</li>
+                            <li><i class="fas fa-check"></i> Acces la webinarii exclusive</li>
+                            <li><i class="fas fa-check"></i> Manager personal dedicat</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn-primary">Alege Premium Anual</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Info Section -->
+    <section class="pricing-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Servicii Personalizate</h3>
+                    <p>Meditatorii și traducătorii sunt selectați în funcție de nevoile tale specifice. Odată aleși, aceștia sunt adăugați la costul abonamentului la un preț redus față de serviciile externe.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Prețuri Accesibile</h3>
+                    <p>Toate prețurile sunt aliniate cu puterea de cumpărare a studenților români și sunt semnificativ mai mici decât costul unei consilieri private externe.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Flexibilitate Totală</h3>
+                    <p>Alegi doar serviciile de care ai nevoie. Nu plătești pentru funcționalități pe care nu le folosești. Totul este personalizat pentru parcursul tău educațional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
+        <div class="container">
+            <div class="guarantee-content">
+                <div class="guarantee-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2>Garanție de satisfacție 30 de zile</h2>
+                <p>Dacă nu ești mulțumit de serviciile noastre în primele 30 de zile, îți returnăm banii integral, fără întrebări.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Întrebări frecvente</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Pot să-mi schimb planul oricând?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Da, poți să-ți schimbi planul oricând din dashboard-ul tău. Modificările se aplică imediat, iar diferența de preț se calculează proporțional.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Ce include consiliera personalizată?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Consiliera include sesiuni 1-on-1 cu studenți și absolvenți de la facultățile care te interesează, revizuirea dosarului tău, sfaturi pentru personal statement și pregătire pentru interviuri.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Cum funcționează serviciile de traducere?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Oferim traduceri autorizate pentru toate documentele necesare admiterii. Planul Premium include 2 documente pe lună, iar Premium Plus oferă traduceri nelimitate.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Există reduceri pentru studenți?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Da, oferim reduceri speciale pentru studenți cu venituri reduse. Contactează-ne pentru a afla mai multe despre programul nostru de burse.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Pot să anulez abonamentul oricând?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Da, poți să-ți anulezi abonamentul oricând fără penalități. Vei avea acces la funcționalitățile premium până la sfârșitul perioadei plătite.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Gata să începi călătoria către facultatea visurilor tale?</h2>
+                <p>Alătură-te celor peste 5000 de elevi care și-au construit viitorul cu UniRunUp</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary large">Începe gratuit</a>
+                    <a href="functionalitati.html" class="btn-secondary large">Vezi funcționalitățile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma care te ghidează către facultatea potrivită pentru tine.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platformă</h4>
+                    <ul>
+                        <li><a href="functionalitati.html">Funcționalități</a></li>
+                        <li><a href="preturi.html">Prețuri</a></li>
+                        <li><a href="facultati.html">Facultăți</a></li>
+                        <li><a href="activitati.html">Activități</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suport</h4>
+                    <ul>
+                        <li><a href="#">Ajutor</a></li>
+                        <li><a href="chat.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ghiduri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termeni și condiții</a></li>
+                        <li><a href="#">Politica de confidențialitate</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activități - UniRunUp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .activities-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+        }
+
+        .activities-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .activities-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories-section {
+            padding: 80px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .category-card.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .activities-section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-card {
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .activity-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .activity-content {
+            padding: 2rem;
+        }
+
+        .activity-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-tag {
+            background-color: var(--accent-light);
+            color: var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .activity-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-benefits {
+            margin: 1.5rem 0;
+        }
+
+        .activity-benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-benefits li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-benefits i {
+            color: var(--accent-color);
+        }
+
+        .activity-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-outline {
+            flex: 1;
+            padding: 12px 24px;
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .impact-section {
+            padding: 80px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .impact-item {
+            padding: 2rem;
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-description {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .activities-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-cta {
+                flex-direction: column;
+            }
+
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">UniRunUp</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="despre.html" class="nav-link">Despre Noi</a></li>
+                <li><a href="functionalitati.html" class="nav-link">Funcționalități</a></li>
+                <li><a href="facultati.html" class="nav-link">Facultăți</a></li>
+                <li><a href="activitati.html" class="nav-link active">Activități</a></li>
+                <li><a href="preturi.html" class="nav-link">Prețuri</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn-secondary">Conectează-te</a>
+                <a href="#" class="btn-primary">Încearcă gratuit</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="activities-hero">
+        <div class="container">
+            <h1>Activități Extracurriculare</h1>
+            <p>Descoperă activități care îți vor îmbogăți CV-ul și te vor ajuta să te evidențiezi la admiterea la facultate.</p>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Categorii de Activități</h2>
+            <div class="categories-grid">
+                <div class="category-card active">
+                    <div class="category-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Competiții Academice</h3>
+                    <p>Olimpiade, concursuri naționale și internaționale</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Voluntariat</h3>
+                    <p>Proiecte sociale și de impact comunitar</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Leadership</h3>
+                    <p>Roluri de conducere în organizații studențești</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Arte & Cultură</h3>
+                    <p>Activități artistice și culturale</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Sport</h3>
+                    <p>Competiții sportive și echipe</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Antreprenoriat</h3>
+                    <p>Startup-uri și proiecte de business</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Activități Recomandate</h2>
+            <div class="activities-grid">
+                <!-- Olimpiada de Informatică -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">Competiție</span>
+                            <span class="activity-tag">Informatică</span>
+                        </div>
+                        <h3>Olimpiada Națională de Informatică</h3>
+                        <p>Cea mai prestigioasă competiție de programare pentru liceeni din România.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">9.5</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">6 luni</span>
+                                <span class="stat-label">Pregătire</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Națională</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Recunoaștere națională</li>
+                                <li><i class="fas fa-check"></i> Scutire de admitere la facultăți IT</li>
+                                <li><i class="fas fa-check"></i> Dezvoltarea gândirii algoritmice</li>
+                                <li><i class="fas fa-check"></i> Networking cu experți</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model United Nations -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">Leadership</span>
+                            <span class="activity-tag">Diplomație</span>
+                        </div>
+                        <h3>Model United Nations</h3>
+                        <p>Simulări ale Organizației Națiunilor Unite pentru dezvoltarea abilităților diplomatice.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">8.5</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3 luni</span>
+                                <span class="stat-label">Pregătire</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Internațional</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Abilități de public speaking</li>
+                                <li><i class="fas fa-check"></i> Înțelegerea problemelor globale</li>
+                                <li><i class="fas fa-check"></i> Networking internațional</li>
+                                <li><i class="fas fa-check"></i> Certificare oficială</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voluntariat Teach for Romania -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">Voluntariat</span>
+                            <span class="activity-tag">Educație</span>
+                        </div>
+                        <h3>Teach for Romania - Voluntar</h3>
+                        <p>Program de mentorat pentru copii din comunități defavorizate.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">8.0</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1 an</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Național</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Impact social măsurabil</li>
+                                <li><i class="fas fa-check"></i> Dezvoltarea empatiei</li>
+                                <li><i class="fas fa-check"></i> Abilități de comunicare</li>
+                                <li><i class="fas fa-check"></i> Certificat de voluntariat</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Startup Weekend -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">Antreprenoriat</span>
+                            <span class="activity-tag">Inovație</span>
+                        </div>
+                        <h3>Startup Weekend</h3>
+                        <p>Eveniment de 54 de ore pentru dezvoltarea unei idei de business.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">7.5</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">54 ore</span>
+                                <span class="stat-label">Durată</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Local</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Experiență antreprenorială</li>
+                                <li><i class="fas fa-check"></i> Lucru în echipă</li>
+                                <li><i class="fas fa-check"></i> Mentorat de experți</li>
+                                <li><i class="fas fa-check"></i> Posibilitate de finanțare</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Festivalul de Film Studențesc -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">Arte</span>
+                            <span class="activity-tag">Creativitate</span>
+                        </div>
+                        <h3>Festivalul de Film Studențesc</h3>
+                        <p>Competiție națională de filme realizate de studenți și liceeni.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">7.0</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">6 luni</span>
+                                <span class="stat-label">Producție</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Național</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Dezvoltarea creativității</li>
+                                <li><i class="fas fa-check"></i> Abilități tehnice</li>
+                                <li><i class="fas fa-check"></i> Portofoliu artistic</li>
+                                <li><i class="fas fa-check"></i> Recunoaștere în industrie</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Echipa de Robotică -->
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <span class="activity-tag">STEM</span>
+                            <span class="activity-tag">Tehnologie</span>
+                        </div>
+                        <h3>First Tech Challenge</h3>
+                        <p>Competiție internațională de robotică pentru liceeni.</p>
+                        <div class="activity-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">9.0</span>
+                                <span class="stat-label">Impact CV</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1 an</span>
+                                <span class="stat-label">Sezon</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">Internațional</span>
+                                <span class="stat-label">Nivel</span>
+                            </div>
+                        </div>
+                        <div class="activity-benefits">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Abilități STEM avansate</li>
+                                <li><i class="fas fa-check"></i> Lucru în echipă</li>
+                                <li><i class="fas fa-check"></i> Gândire inginerească</li>
+                                <li><i class="fas fa-check"></i> Competiție mondială</li>
+                            </ul>
+                        </div>
+                        <div class="activity-cta">
+                            <a href="#" class="btn-outline">Vezi detalii</a>
+                            <a href="#" class="btn-primary">Înscrie-te</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Impactul Activităților Extracurriculare</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <span class="impact-number">85%</span>
+                    <p class="impact-description">din studenții cu activități extracurriculare sunt acceptați la prima opțiune</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-number">3x</span>
+                    <p class="impact-description">mai multe șanse de a primi burse de merit</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-number">92%</span>
+                    <p class="impact-description">dintre angajatori consideră importante activitățile extracurriculare</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-number">150+</span>
+                    <p class="impact-description">activități disponibile în platforma noastră</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Începe să construiești un CV de excepție</h2>
+                <p>Descoperă activitățile potrivite pentru profilul tău și obiectivele tale academice</p>
+                <div class="cta-buttons">
+                    <a href="dashboard.html" class="btn-primary large">Explorează activități</a>
+                    <a href="functionalitati.html" class="btn-secondary large">Vezi toate funcționalitățile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma care te ghidează către facultatea potrivită pentru tine.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platformă</h4>
+                    <ul>
+                        <li><a href="functionalitati.html">Funcționalități</a></li>
+                        <li><a href="preturi.html">Prețuri</a></li>
+                        <li><a href="facultati.html">Facultăți</a></li>
+                        <li><a href="activitati.html">Activități</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suport</h4>
+                    <ul>
+                        <li><a href="#">Ajutor</a></li>
+                        <li><a href="chat.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ghiduri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termeni și condiții</a></li>
+                        <li><a href="#">Politica de confidențialitate</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

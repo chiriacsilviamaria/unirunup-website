@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghid Personalizat - UniRunUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #1E40AF;
+            --accent-color: #F59E0B;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --danger-color: #EF4444;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-accent: #EFF6FF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.5rem;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            padding: 4rem 0;
+        }
+
+        .profile-card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .profile-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .profile-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .profile-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Guide Content */
+        .guide-content {
+            padding: 2rem 0;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features li {
+            padding: 0.25rem 0;
+            color: var(--text-secondary);
+        }
+
+        .card-features li:before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: var(--primary-color);
+            border: 4px solid var(--bg-primary);
+            top: 1.5rem;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+        }
+
+        /* Resources */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-item {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .resource-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section a {
+            color: #D1D5DB;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9CA3AF;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-hero p {
+                font-size: 1rem;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">UniRunUp</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Acasă</a></li>
+                    <li><a href="despre.html">Despre</a></li>
+                    <li><a href="functionalitati.html">Funcționalități</a></li>
+                    <li><a href="facultati.html">Facultăți</a></li>
+                    <li><a href="activitati.html">Activități</a></li>
+                    <li><a href="preturi.html">Prețuri</a></li>
+                    <li><a href="chat.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Ghidul Tău Personalizat</h1>
+            <p>Recomandări personalizate bazate pe profilul tău vocațional. Descoperă pașii concreți pentru a-ți atinge obiectivele academice și profesionale.</p>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-card" id="profileCard">
+                <div class="profile-icon" id="profileIcon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h2 class="profile-title" id="profileTitle">Profilul Tău Vocațional</h2>
+                <p class="profile-description" id="profileDescription">
+                    Pentru a primi recomandări personalizate, te rugăm să completezi testul de orientare vocațională.
+                </p>
+                <div class="profile-actions">
+                    <a href="test-orientare.html" class="btn btn-primary" id="testBtn">
+                        <i class="fas fa-clipboard-check"></i> Completează Testul
+                    </a>
+                    <button class="btn btn-secondary" onclick="generateSampleProfile()">
+                        <i class="fas fa-eye"></i> Vezi Exemplu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Content -->
+    <div class="guide-content" id="guideContent" style="display: none;">
+        <div class="container">
+            <!-- Recommended Universities -->
+            <section class="section">
+                <h2 class="section-title">Universități Recomandate</h2>
+                <div class="cards-grid" id="universitiesGrid">
+                    <!-- Universities will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Study Programs -->
+            <section class="section">
+                <h2 class="section-title">Programe de Studiu Potrivite</h2>
+                <div class="cards-grid" id="programsGrid">
+                    <!-- Programs will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Career Path Timeline -->
+            <section class="section">
+                <h2 class="section-title">Traiectoria Ta de Carieră</h2>
+                <div class="timeline" id="careerTimeline">
+                    <!-- Timeline will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Skills Development -->
+            <section class="section">
+                <h2 class="section-title">Competențe de Dezvoltat</h2>
+                <div class="cards-grid" id="skillsGrid">
+                    <!-- Skills will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section class="section">
+                <h2 class="section-title">Resurse Utile</h2>
+                <div class="resource-grid" id="resourcesGrid">
+                    <!-- Resources will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Action Plan -->
+            <section class="section">
+                <h2 class="section-title">Planul Tău de Acțiune</h2>
+                <div class="cards-grid" id="actionPlan">
+                    <!-- Action plan will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma ta de orientare universitară și dezvoltare personală.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Linkuri Utile</h3>
+                    <a href="index.html">Acasă</a>
+                    <a href="despre.html">Despre Noi</a>
+                    <a href="functionalitati.html">Funcționalități</a>
+                    <a href="facultati.html">Facultăți</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Suport</h3>
+                    <a href="chat.html">Contact</a>
+                    <a href="consiliere.html">Consiliere</a>
+                    <a href="test-orientare.html">Test Orientare</a>
+                    <a href="ghid-personalizat.html">Ghid Personalizat</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@unirunup.ro</p>
+                    <p><i class="fas fa-phone"></i> +40 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const profileData = {
+            STEM: {
+                title: "Profil STEM",
+                icon: "fas fa-atom",
+                description: "Bazat pe testul tău de orientare vocațională, ai un profil STEM puternic. Iată recomandările personalizate pentru tine:",
+                universities: [
+                    {
+                        name: "Universitatea Politehnica București",
+                        description: "Cea mai prestigioasă universitate tehnică din România",
+                        features: ["Inginerie de top", "Cercetare avansată", "Parteneriate internaționale", "Laboratoare moderne"],
+                        icon: "fas fa-university"
+                    },
+                    {
+                        name: "Universitatea Babeș-Bolyai Cluj",
+                        description: "Facultatea de Matematică și Informatică de renume",
+                        features: ["Matematică aplicată", "Informatică avansată", "Cercetare interdisciplinară", "Programe în engleză"],
+                        icon: "fas fa-graduation-cap"
+                    },
+                    {
+                        name: "Universitatea din București",
+                        description: "Facultatea de Fizică cu tradiție în cercetare",
+                        features: ["Fizică teoretică", "Fizică aplicată", "Nanotechnologii", "Colaborări internaționale"],
+                        icon: "fas fa-microscope"
+                    }
+                ],
+                programs: [
+                    {
+                        name: "Inginerie Informatică",
+                        description: "Programare, algoritmi, sisteme distribuite",
+                        features: ["Programare avansată", "Inteligență artificială", "Dezvoltare software", "Sisteme embedded"],
+                        icon: "fas fa-laptop-code"
+                    },
+                    {
+                        name: "Inginerie Electronică",
+                        description: "Circuite, sisteme electronice, telecomunicații",
+                        features: ["Circuite integrate", "Sisteme de comunicații", "IoT", "Robotică"],
+                        icon: "fas fa-microchip"
+                    },
+                    {
+                        name: "Matematică Aplicată",
+                        description: "Modelare matematică, statistică, analiză numerică",
+                        features: ["Modelare matematică", "Statistică avansată", "Analiză de date", "Cercetare operațională"],
+                        icon: "fas fa-calculator"
+                    }
+                ],
+                timeline: [
+                    { title: "Anul I-II", description: "Fundamentele matematicii și științelor exacte. Cursuri de bază în domeniul ales." },
+                    { title: "Anul III", description: "Specializare și proiecte practice. Stagii de practică în companii tech." },
+                    { title: "Anul IV", description: "Proiect de diplomă și pregătire pentru carieră. Aplicații pentru masterat." },
+                    { title: "Masterat", description: "Specializare avansată și cercetare. Colaborări cu industria." },
+                    { title: "Cariera", description: "Poziții de inginer, cercetător sau antreprenor în domeniul tech." }
+                ],
+                skills: [
+                    {
+                        name: "Programare",
+                        description: "Python, Java, C++, JavaScript",
+                        icon: "fas fa-code"
+                    },
+                    {
+                        name: "Matematică Avansată",
+                        description: "Analiză, algebră, statistică",
+                        icon: "fas fa-square-root-alt"
+                    },
+                    {
+                        name: "Gândire Analitică",
+                        description: "Rezolvarea problemelor complexe",
+                        icon: "fas fa-brain"
+                    }
+                ],
+                resources: [
+                    { title: "Coursera - Computer Science", description: "Cursuri online de informatică", link: "#" },
+                    { title: "Khan Academy - Mathematics", description: "Matematică de la bază la avansat", link: "#" },
+                    { title: "GitHub", description: "Platformă pentru proiecte de programare", link: "#" },
+                    { title: "Stack Overflow", description: "Comunitatea programatorilor", link: "#" },
+                    { title: "MIT OpenCourseWare", description: "Cursuri gratuite de la MIT", link: "#" },
+                    { title: "Codecademy", description: "Învață să programezi interactiv", link: "#" }
+                ],
+                actionPlan: [
+                    {
+                        title: "Următoarele 3 luni",
+                        description: "Consolidează cunoștințele de matematică și începe să înveți programare",
+                        icon: "fas fa-calendar-alt"
+                    },
+                    {
+                        title: "Următoarele 6 luni",
+                        description: "Participă la olimpiade și concursuri de informatică/matematică",
+                        icon: "fas fa-trophy"
+                    },
+                    {
+                        title: "Următorul an",
+                        description: "Aplică la universitățile recomandate și pregătește-te pentru admitere",
+                        icon: "fas fa-graduation-cap"
+                    }
+                ]
+            },
+            Social: {
+                title: "Profil Social",
+                icon: "fas fa-users",
+                description: "Ai o orientare puternică către domeniul social și relațiile interpersonale. Iată recomandările pentru tine:",
+                universities: [
+                    {
+                        name: "Universitatea din București",
+                        description: "Facultatea de Psihologie și Științele Educației",
+                        features: ["Psihologie clinică", "Psihologie organizațională", "Științele educației", "Cercetare în psihologie"],
+                        icon: "fas fa-university"
+                    },
+                    {
+                        name: "Universitatea Babeș-Bolyai Cluj",
+                        description: "Facultatea de Sociologie și Asistență Socială",
+                        features: ["Sociologie aplicată", "Asistență socială", "Dezvoltare comunitară", "Politici sociale"],
+                        icon: "fas fa-graduation-cap"
+                    },
+                    {
+                        name: "Universitatea Alexandru Ioan Cuza Iași",
+                        description: "Facultatea de Filosofie și Științe Social-Politice",
+                        features: ["Științe politice", "Relații internaționale", "Comunicare", "Filosofie aplicată"],
+                        icon: "fas fa-globe"
+                    }
+                ],
+                programs: [
+                    {
+                        name: "Psihologie",
+                        description: "Studiul comportamentului uman și proceselor mentale",
+                        features: ["Psihologie clinică", "Psihologie educațională", "Psihoterapie", "Evaluare psihologică"],
+                        icon: "fas fa-brain"
+                    },
+                    {
+                        name: "Asistență Socială",
+                        description: "Ajutorarea persoanelor și comunităților în dificultate",
+                        features: ["Intervenție socială", "Politici sociale", "Lucru cu comunitatea", "Consiliere socială"],
+                        icon: "fas fa-hands-helping"
+                    },
+                    {
+                        name: "Științele Educației",
+                        description: "Formarea și dezvoltarea sistemelor educaționale",
+                        features: ["Pedagogie", "Psihopedagogie", "Management educațional", "Educație specială"],
+                        icon: "fas fa-chalkboard-teacher"
+                    }
+                ],
+                timeline: [
+                    { title: "Anul I-II", description: "Fundamentele psihologiei, sociologiei și științelor educației." },
+                    { title: "Anul III", description: "Specializare și practică în instituții sociale și educaționale." },
+                    { title: "Anul IV", description: "Proiect de diplomă și stagii în domeniul ales." },
+                    { title: "Masterat", description: "Specializare avansată în psihoterapie, consiliere sau management social." },
+                    { title: "Cariera", description: "Psiholog, asistent social, consilier educațional sau terapeut." }
+                ],
+                skills: [
+                    {
+                        name: "Empatie și Ascultare Activă",
+                        description: "Înțelegerea și sprijinirea altora",
+                        icon: "fas fa-heart"
+                    },
+                    {
+                        name: "Comunicare Eficientă",
+                        description: "Abilități de comunicare verbală și nonverbală",
+                        icon: "fas fa-comments"
+                    },
+                    {
+                        name: "Rezolvarea Conflictelor",
+                        description: "Medierea și gestionarea situațiilor dificile",
+                        icon: "fas fa-balance-scale"
+                    }
+                ],
+                resources: [
+                    { title: "Asociația Psihologilor din România", description: "Resurse și evenimente pentru psihologi", link: "#" },
+                    { title: "Colegiul Asistenților Sociali", description: "Informații despre profesia de asistent social", link: "#" },
+                    { title: "TED Talks - Psychology", description: "Prezentări inspiraționale despre psihologie", link: "#" },
+                    { title: "Coursera - Social Sciences", description: "Cursuri online în științe sociale", link: "#" },
+                    { title: "Revista de Psihologie", description: "Publicații de specialitate", link: "#" },
+                    { title: "Voluntariat.ro", description: "Oportunități de voluntariat", link: "#" }
+                ],
+                actionPlan: [
+                    {
+                        title: "Următoarele 3 luni",
+                        description: "Începe să faci voluntariat și să dezvolți abilități de comunicare",
+                        icon: "fas fa-calendar-alt"
+                    },
+                    {
+                        title: "Următoarele 6 luni",
+                        description: "Participă la cursuri de dezvoltare personală și leadership",
+                        icon: "fas fa-user-graduate"
+                    },
+                    {
+                        title: "Următorul an",
+                        description: "Aplică la facultățile de profil și pregătește-te pentru admitere",
+                        icon: "fas fa-graduation-cap"
+                    }
+                ]
+            },
+            Creativ: {
+                title: "Profil Creativ",
+                icon: "fas fa-palette",
+                description: "Ai o creativitate remarcabilă și o pasiune pentru arte. Iată recomandările pentru dezvoltarea ta artistică:",
+                universities: [
+                    {
+                        name: "Universitatea Națională de Arte București",
+                        description: "Cea mai prestigioasă instituție de arte din România",
+                        features: ["Arte plastice", "Design grafic", "Arte decorative", "Restaurare"],
+                        icon: "fas fa-university"
+                    },
+                    {
+                        name: "Universitatea de Arte și Design Cluj",
+                        description: "Centru de excelență în design și arte vizuale",
+                        features: ["Design industrial", "Arte vizuale", "Ceramică", "Design textil"],
+                        icon: "fas fa-paint-brush"
+                    },
+                    {
+                        name: "Academia de Muzică București",
+                        description: "Formarea muzicienilor profesioniști",
+                        features: ["Interpretare muzicală", "Compoziție", "Muzicologie", "Pedagogie muzicală"],
+                        icon: "fas fa-music"
+                    }
+                ],
+                programs: [
+                    {
+                        name: "Design Grafic",
+                        description: "Comunicare vizuală și design digital",
+                        features: ["Identitate vizuală", "Design web", "Tipografie", "Ilustrație digitală"],
+                        icon: "fas fa-drafting-compass"
+                    },
+                    {
+                        name: "Arte Plastice",
+                        description: "Pictură, sculptură și arte tradiționale",
+                        features: ["Pictură", "Sculptură", "Gravură", "Arte decorative"],
+                        icon: "fas fa-palette"
+                    },
+                    {
+                        name: "Arhitectură",
+                        description: "Proiectarea spațiilor și clădirilor",
+                        features: ["Proiectare arhitecturală", "Urbanism", "Design interior", "Arhitectură peisagistică"],
+                        icon: "fas fa-building"
+                    }
+                ],
+                timeline: [
+                    { title: "Anul I-II", description: "Fundamentele artei, desenul academic și tehnicile de bază." },
+                    { title: "Anul III", description: "Specializare în domeniul ales și dezvoltarea stilului personal." },
+                    { title: "Anul IV", description: "Proiect de diplomă și prima expoziție personală." },
+                    { title: "Masterat", description: "Perfecționarea tehnicilor și dezvoltarea unei viziuni artistice mature." },
+                    { title: "Cariera", description: "Artist independent, designer, curator sau profesor de artă." }
+                ],
+                skills: [
+                    {
+                        name: "Tehnici Artistice",
+                        description: "Desen, pictură, sculptură, design digital",
+                        icon: "fas fa-paint-brush"
+                    },
+                    {
+                        name: "Creativitate și Inovație",
+                        description: "Gândire creativă și soluții inovatoare",
+                        icon: "fas fa-lightbulb"
+                    },
+                    {
+                        name: "Sensibilitate Estetică",
+                        description: "Înțelegerea frumuseții și armoniei vizuale",
+                        icon: "fas fa-eye"
+                    }
+                ],
+                resources: [
+                    { title: "Behance", description: "Platformă pentru portofolii creative", link: "#" },
+                    { title: "Adobe Creative Suite", description: "Instrumente profesionale de design", link: "#" },
+                    { title: "Dribbble", description: "Comunitatea designerilor", link: "#" },
+                    { title: "Skillshare", description: "Cursuri creative online", link: "#" },
+                    { title: "Artsy", description: "Descoperă arta contemporană", link: "#" },
+                    { title: "CreativeLive", description: "Cursuri de fotografie și design", link: "#" }
+                ],
+                actionPlan: [
+                    {
+                        title: "Următoarele 3 luni",
+                        description: "Dezvoltă un portofoliu artistic și înscrie-te la cursuri de artă",
+                        icon: "fas fa-calendar-alt"
+                    },
+                    {
+                        title: "Următoarele 6 luni",
+                        description: "Participă la concursuri de artă și expoziții locale",
+                        icon: "fas fa-trophy"
+                    },
+                    {
+                        title: "Următorul an",
+                        description: "Pregătește portofoliul pentru admiterea la facultatea de arte",
+                        icon: "fas fa-graduation-cap"
+                    }
+                ]
+            }
+        };
+
+        function checkProfile() {
+            // Check if user has completed the test (simulate with localStorage)
+            const userProfile = localStorage.getItem('userProfile');
+            if (userProfile) {
+                displayProfile(userProfile);
+            }
+        }
+
+        function generateSampleProfile() {
+            // Generate a sample profile for demonstration
+            const profiles = ['STEM', 'Social', 'Creativ'];
+            const randomProfile = profiles[Math.floor(Math.random() * profiles.length)];
+            displayProfile(randomProfile);
+        }
+
+        function displayProfile(profileType) {
+            const profile = profileData[profileType];
+            if (!profile) return;
+
+            // Update profile card
+            document.getElementById('profileIcon').innerHTML = `<i class="${profile.icon}"></i>`;
+            document.getElementById('profileTitle').textContent = profile.title;
+            document.getElementById('profileDescription').textContent = profile.description;
+            document.getElementById('testBtn').style.display = 'none';
+
+            // Show guide content
+            document.getElementById('guideContent').style.display = 'block';
+
+            // Populate universities
+            const universitiesGrid = document.getElementById('universitiesGrid');
+            universitiesGrid.innerHTML = '';
+            profile.universities.forEach(uni => {
+                const card = createCard(uni.name, uni.description, uni.features, uni.icon);
+                universitiesGrid.appendChild(card);
+            });
+
+            // Populate programs
+            const programsGrid = document.getElementById('programsGrid');
+            programsGrid.innerHTML = '';
+            profile.programs.forEach(program => {
+                const card = createCard(program.name, program.description, program.features, program.icon);
+                programsGrid.appendChild(card);
+            });
+
+            // Populate timeline
+            const timeline = document.getElementById('careerTimeline');
+            timeline.innerHTML = '';
+            profile.timeline.forEach((item, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">${item.title}</h3>
+                        <p class="timeline-description">${item.description}</p>
+                    </div>
+                `;
+                timeline.appendChild(timelineItem);
+            });
+
+            // Populate skills
+            const skillsGrid = document.getElementById('skillsGrid');
+            skillsGrid.innerHTML = '';
+            profile.skills.forEach(skill => {
+                const card = createSkillCard(skill.name, skill.description, skill.icon);
+                skillsGrid.appendChild(card);
+            });
+
+            // Populate resources
+            const resourcesGrid = document.getElementById('resourcesGrid');
+            resourcesGrid.innerHTML = '';
+            profile.resources.forEach(resource => {
+                const resourceItem = document.createElement('div');
+                resourceItem.className = 'resource-item';
+                resourceItem.innerHTML = `
+                    <h4 class="resource-title">${resource.title}</h4>
+                    <p class="resource-description">${resource.description}</p>
+                    <a href="${resource.link}" class="resource-link">
+                        Accesează <i class="fas fa-external-link-alt"></i>
+                    </a>
+                `;
+                resourcesGrid.appendChild(resourceItem);
+            });
+
+            // Populate action plan
+            const actionPlan = document.getElementById('actionPlan');
+            actionPlan.innerHTML = '';
+            profile.actionPlan.forEach(action => {
+                const card = createActionCard(action.title, action.description, action.icon);
+                actionPlan.appendChild(card);
+            });
+        }
+
+        function createCard(title, description, features, icon) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const featuresHTML = features.map(feature => `<li>${feature}</li>`).join('');
+            
+            card.innerHTML = `
+                <div class="card-icon">
+                    <i class="${icon}"></i>
+                </div>
+                <h3 class="card-title">${title}</h3>
+                <p class="card-description">${description}</p>
+                <ul class="card-features">
+                    ${featuresHTML}
+                </ul>
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-info-circle"></i> Află mai multe
+                </a>
+            `;
+            
+            return card;
+        }
+
+        function createSkillCard(title, description, icon) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            card.innerHTML = `
+                <div class="card-icon">
+                    <i class="${icon}"></i>
+                </div>
+                <h3 class="card-title">${title}</h3>
+                <p class="card-description">${description}</p>
+                <a href="#" class="btn btn-outline">
+                    <i class="fas fa-play"></i> Începe să înveți
+                </a>
+            `;
+            
+            return card;
+        }
+
+        function createActionCard(title, description, icon) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            card.innerHTML = `
+                <div class="card-icon">
+                    <i class="${icon}"></i>
+                </div>
+                <h3 class="card-title">${title}</h3>
+                <p class="card-description">${description}</p>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Marchează ca făcut
+                </a>
+            `;
+            
+            return card;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', checkProfile);
+    </script>
+</body>
+</html>

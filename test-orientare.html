@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Orientare Vocațională - UniRunUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #1E40AF;
+            --accent-color: #F59E0B;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --danger-color: #EF4444;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-accent: #EFF6FF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 0.5rem;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Test Container */
+        .test-container {
+            padding: 4rem 0;
+        }
+
+        .test-card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .progress-bar {
+            background: var(--bg-secondary);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .question-counter {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+        }
+
+        .question h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-accent);
+        }
+
+        .option.selected {
+            border-color: var(--primary-color);
+            background: var(--bg-accent);
+            color: var(--primary-color);
+        }
+
+        .option-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results Section */
+        .results {
+            display: none;
+            text-align: center;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .result-card {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .result-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .recommendations {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .recommendation {
+            background: var(--bg-accent);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .recommendation h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section a {
+            color: #D1D5DB;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9CA3AF;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-hero p {
+                font-size: 1rem;
+            }
+
+            .test-card {
+                padding: 1.5rem;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">UniRunUp</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Acasă</a></li>
+                    <li><a href="despre.html">Despre</a></li>
+                    <li><a href="functionalitati.html">Funcționalități</a></li>
+                    <li><a href="facultati.html">Facultăți</a></li>
+                    <li><a href="activitati.html">Activități</a></li>
+                    <li><a href="preturi.html">Prețuri</a></li>
+                    <li><a href="chat.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Test de Orientare Vocațională</h1>
+            <p>Descoperă-ți pasiunile și aptitudinile prin testul nostru interactiv. Află ce domenii de studiu și cariere se potrivesc cel mai bine personalității tale.</p>
+        </div>
+    </section>
+
+    <!-- Test Container -->
+    <section class="test-container">
+        <div class="container">
+            <div class="test-card">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="question-counter">
+                    <span id="currentQuestion">1</span> din <span id="totalQuestions">15</span> întrebări
+                </div>
+
+                <div id="testContent">
+                    <div class="question">
+                        <h3 id="questionText">Care dintre următoarele activități te pasionează cel mai mult?</h3>
+                        <div class="options" id="optionsContainer">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                        Următoarea <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <div class="result-card">
+                    <div class="result-icon" id="resultIcon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h2 class="result-title" id="resultTitle">Rezultatul tău</h2>
+                    <p class="result-description" id="resultDescription">
+                        Descrierea rezultatului va apărea aici...
+                    </p>
+                    <div class="recommendations" id="recommendations">
+                        <!-- Recommendations will be populated by JavaScript -->
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <a href="ghid-personalizat.html" class="btn btn-primary">
+                            <i class="fas fa-compass"></i> Vezi Ghidul Personalizat
+                        </a>
+                        <a href="consiliere.html" class="btn btn-secondary" style="margin-left: 1rem;">
+                            <i class="fas fa-comments"></i> Consiliere Personalizată
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma ta de orientare universitară și dezvoltare personală.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Linkuri Utile</h3>
+                    <a href="index.html">Acasă</a>
+                    <a href="despre.html">Despre Noi</a>
+                    <a href="functionalitati.html">Funcționalități</a>
+                    <a href="facultati.html">Facultăți</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Suport</h3>
+                    <a href="chat.html">Contact</a>
+                    <a href="consiliere.html">Consiliere</a>
+                    <a href="test-orientare.html">Test Orientare</a>
+                    <a href="ghid-personalizat.html">Ghid Personalizat</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@unirunup.ro</p>
+                    <p><i class="fas fa-phone"></i> +40 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                text: "Care dintre următoarele activități te pasionează cel mai mult?",
+                options: [
+                    { text: "Rezolvarea problemelor matematice complexe", icon: "fas fa-calculator", category: "STEM" },
+                    { text: "Scrierea de povești și articole", icon: "fas fa-pen", category: "Umanist" },
+                    { text: "Experimentele științifice", icon: "fas fa-flask", category: "STEM" },
+                    { text: "Organizarea de evenimente", icon: "fas fa-calendar", category: "Social" }
+                ]
+            },
+            {
+                text: "În timpul liber preferi să:",
+                options: [
+                    { text: "Citești cărți de specialitate", icon: "fas fa-book", category: "Academic" },
+                    { text: "Faci sport sau activități fizice", icon: "fas fa-running", category: "Practic" },
+                    { text: "Desenezi sau creezi artă", icon: "fas fa-palette", category: "Creativ" },
+                    { text: "Socializezi cu prietenii", icon: "fas fa-users", category: "Social" }
+                ]
+            },
+            {
+                text: "Ce tip de mediu de lucru preferi?",
+                options: [
+                    { text: "Laborator sau atelier tehnic", icon: "fas fa-microscope", category: "STEM" },
+                    { text: "Birou cu echipă mare", icon: "fas fa-building", category: "Social" },
+                    { text: "Spațiu creativ și flexibil", icon: "fas fa-lightbulb", category: "Creativ" },
+                    { text: "Bibliotecă sau spațiu liniștit", icon: "fas fa-book-open", category: "Academic" }
+                ]
+            },
+            {
+                text: "Care este punctul tău forte?",
+                options: [
+                    { text: "Gândirea analitică și logică", icon: "fas fa-brain", category: "STEM" },
+                    { text: "Comunicarea și empatia", icon: "fas fa-heart", category: "Social" },
+                    { text: "Creativitatea și imaginația", icon: "fas fa-magic", category: "Creativ" },
+                    { text: "Organizarea și planificarea", icon: "fas fa-tasks", category: "Practic" }
+                ]
+            },
+            {
+                text: "Ce te motivează cel mai mult?",
+                options: [
+                    { text: "Descoperirea de noi cunoștințe", icon: "fas fa-search", category: "Academic" },
+                    { text: "Ajutarea altor oameni", icon: "fas fa-hands-helping", category: "Social" },
+                    { text: "Crearea de lucruri noi", icon: "fas fa-hammer", category: "Creativ" },
+                    { text: "Rezolvarea problemelor practice", icon: "fas fa-wrench", category: "Practic" }
+                ]
+            },
+            {
+                text: "În ce domeniu ai cele mai bune rezultate la școală?",
+                options: [
+                    { text: "Matematică și Fizică", icon: "fas fa-square-root-alt", category: "STEM" },
+                    { text: "Limba Română și Istorie", icon: "fas fa-language", category: "Umanist" },
+                    { text: "Arte și Muzică", icon: "fas fa-music", category: "Creativ" },
+                    { text: "Sport și Educație Fizică", icon: "fas fa-medal", category: "Practic" }
+                ]
+            },
+            {
+                text: "Cum preferi să înveți lucruri noi?",
+                options: [
+                    { text: "Prin experimente și practică", icon: "fas fa-vial", category: "STEM" },
+                    { text: "Prin lectură și cercetare", icon: "fas fa-graduation-cap", category: "Academic" },
+                    { text: "Prin proiecte creative", icon: "fas fa-paint-brush", category: "Creativ" },
+                    { text: "Prin discuții și colaborare", icon: "fas fa-comments", category: "Social" }
+                ]
+            },
+            {
+                text: "Ce tip de provocări îți plac?",
+                options: [
+                    { text: "Probleme tehnice complexe", icon: "fas fa-cogs", category: "STEM" },
+                    { text: "Situații care necesită empatie", icon: "fas fa-user-friends", category: "Social" },
+                    { text: "Proiecte artistice inovatoare", icon: "fas fa-star", category: "Creativ" },
+                    { text: "Sarcini practice și concrete", icon: "fas fa-tools", category: "Practic" }
+                ]
+            },
+            {
+                text: "Care este visul tău de carieră?",
+                options: [
+                    { text: "Inginer sau cercetător", icon: "fas fa-rocket", category: "STEM" },
+                    { text: "Profesor sau consilier", icon: "fas fa-chalkboard-teacher", category: "Social" },
+                    { text: "Artist sau designer", icon: "fas fa-drafting-compass", category: "Creativ" },
+                    { text: "Antreprenor sau manager", icon: "fas fa-briefcase", category: "Practic" }
+                ]
+            },
+            {
+                text: "Cum îți petreci vacanțele?",
+                options: [
+                    { text: "Vizitez muzee și expoziții", icon: "fas fa-university", category: "Academic" },
+                    { text: "Fac voluntariat", icon: "fas fa-hand-holding-heart", category: "Social" },
+                    { text: "Particip la ateliere creative", icon: "fas fa-palette", category: "Creativ" },
+                    { text: "Călătoresc și explorez", icon: "fas fa-map", category: "Practic" }
+                ]
+            },
+            {
+                text: "Ce tip de cărți preferi să citești?",
+                options: [
+                    { text: "Cărți științifice și tehnice", icon: "fas fa-atom", category: "STEM" },
+                    { text: "Romane și poezie", icon: "fas fa-feather", category: "Umanist" },
+                    { text: "Biografii și istorie", icon: "fas fa-scroll", category: "Academic" },
+                    { text: "Ghiduri practice", icon: "fas fa-map-signs", category: "Practic" }
+                ]
+            },
+            {
+                text: "În echipă preferi să fii:",
+                options: [
+                    { text: "Cel care analizează datele", icon: "fas fa-chart-line", category: "STEM" },
+                    { text: "Cel care mediază conflictele", icon: "fas fa-balance-scale", category: "Social" },
+                    { text: "Cel care vine cu idei creative", icon: "fas fa-lightbulb", category: "Creativ" },
+                    { text: "Cel care organizează activitățile", icon: "fas fa-clipboard-list", category: "Practic" }
+                ]
+            },
+            {
+                text: "Ce te îngrijorează cel mai mult în legătură cu viitorul?",
+                options: [
+                    { text: "Să nu pot contribui la progresul științific", icon: "fas fa-microscope", category: "STEM" },
+                    { text: "Să nu pot ajuta oamenii", icon: "fas fa-heart", category: "Social" },
+                    { text: "Să nu îmi pot exprima creativitatea", icon: "fas fa-paint-brush", category: "Creativ" },
+                    { text: "Să nu am stabilitate financiară", icon: "fas fa-coins", category: "Practic" }
+                ]
+            },
+            {
+                text: "Care este cea mai mare realizare de care ești mândru/mândră?",
+                options: [
+                    { text: "Un proiect științific reușit", icon: "fas fa-trophy", category: "STEM" },
+                    { text: "Ajutarea unui prieten în dificultate", icon: "fas fa-hands-helping", category: "Social" },
+                    { text: "O creație artistică apreciată", icon: "fas fa-award", category: "Creativ" },
+                    { text: "Organizarea unui eveniment reușit", icon: "fas fa-star", category: "Practic" }
+                ]
+            },
+            {
+                text: "Cum îți imaginezi locul de muncă ideal?",
+                options: [
+                    { text: "Un laborator modern cu echipamente avansate", icon: "fas fa-flask", category: "STEM" },
+                    { text: "Un spațiu deschis cu multă interacțiune umană", icon: "fas fa-users", category: "Social" },
+                    { text: "Un atelier creativ cu libertate de expresie", icon: "fas fa-palette", category: "Creativ" },
+                    { text: "Un birou organizat cu obiective clare", icon: "fas fa-desktop", category: "Practic" }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let answers = [];
+        let scores = {
+            STEM: 0,
+            Social: 0,
+            Creativ: 0,
+            Practic: 0,
+            Academic: 0,
+            Umanist: 0
+        };
+
+        function initializeTest() {
+            document.getElementById('totalQuestions').textContent = questions.length;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionText').textContent = question.text;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.onclick = () => selectOption(index);
+                optionElement.innerHTML = `
+                    <div class="option-icon">
+                        <i class="${option.icon}"></i>
+                    </div>
+                    <div>${option.text}</div>
+                `;
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            updateProgress();
+            updateNavigationButtons();
+        }
+
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            answers[currentQuestionIndex] = optionIndex;
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (answers[currentQuestionIndex] === undefined) return;
+            
+            const selectedOption = questions[currentQuestionIndex].options[answers[currentQuestionIndex]];
+            scores[selectedOption.category]++;
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                const selectedOption = questions[currentQuestionIndex].options[answers[currentQuestionIndex]];
+                if (selectedOption) {
+                    scores[selectedOption.category]--;
+                }
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function updateNavigationButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').disabled = answers[currentQuestionIndex] === undefined;
+            
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById('nextBtn').innerHTML = 'Vezi Rezultatele <i class="fas fa-check"></i>';
+            } else {
+                document.getElementById('nextBtn').innerHTML = 'Următoarea <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        function showResults() {
+            const maxScore = Math.max(...Object.values(scores));
+            const dominantCategory = Object.keys(scores).find(key => scores[key] === maxScore);
+            
+            const results = {
+                STEM: {
+                    title: "Profil STEM",
+                    icon: "fas fa-atom",
+                    description: "Ai o înclinație puternică către științe, tehnologie, inginerie și matematică. Îți place să analizezi, să experimentezi și să rezolvi probleme complexe.",
+                    recommendations: [
+                        { title: "Inginerie", description: "Informatică, Electronică, Mecanică, Civilă" },
+                        { title: "Științe Exacte", description: "Matematică, Fizică, Chimie, Biologie" },
+                        { title: "Tehnologie", description: "IT, Robotică, Inteligență Artificială" }
+                    ]
+                },
+                Social: {
+                    title: "Profil Social",
+                    icon: "fas fa-users",
+                    description: "Ești o persoană empatică care își dorește să ajute oamenii și să contribuie la bunăstarea societății. Comunicarea și relațiile interpersonale sunt punctele tale forte.",
+                    recommendations: [
+                        { title: "Științe Sociale", description: "Psihologie, Sociologie, Asistență Socială" },
+                        { title: "Educație", description: "Pedagogie, Învățământ Preșcolar, Educație Specială" },
+                        { title: "Sănătate", description: "Medicină, Nursing, Kinetoterapie" }
+                    ]
+                },
+                Creativ: {
+                    title: "Profil Creativ",
+                    icon: "fas fa-palette",
+                    description: "Ai o imaginație bogată și îți place să creezi lucruri noi și originale. Arta, designul și inovația sunt domeniile în care excelezi.",
+                    recommendations: [
+                        { title: "Arte Vizuale", description: "Design Grafic, Arhitectură, Arte Plastice" },
+                        { title: "Media", description: "Film, Fotografie, Jurnalism, Publicitate" },
+                        { title: "Performanță", description: "Teatru, Muzică, Dans, Literatura" }
+                    ]
+                },
+                Practic: {
+                    title: "Profil Practic",
+                    icon: "fas fa-tools",
+                    description: "Ești o persoană orientată spre acțiune care preferă să lucreze cu mâinile și să vadă rezultate concrete. Îți place să organizezi și să implementezi soluții practice.",
+                    recommendations: [
+                        { title: "Business", description: "Management, Antreprenoriat, Marketing" },
+                        { title: "Aplicat", description: "Agricultură, Construcții, Industrie" },
+                        { title: "Servicii", description: "Turism, Comerț, Logistică" }
+                    ]
+                },
+                Academic: {
+                    title: "Profil Academic",
+                    icon: "fas fa-graduation-cap",
+                    description: "Îți place să studiezi în profunzime și să înțelegi concepte complexe. Cercetarea și învățarea continuă sunt pasiunile tale principale.",
+                    recommendations: [
+                        { title: "Cercetare", description: "Științe Fundamentale, Istorie, Filosofie" },
+                        { title: "Educație Superioară", description: "Predare Universitară, Cercetare Academică" },
+                        { title: "Analiză", description: "Economie, Statistică, Științe Politice" }
+                    ]
+                },
+                Umanist: {
+                    title: "Profil Umanist",
+                    icon: "fas fa-book",
+                    description: "Ai o pasiune pentru limbă, literatură și cultură. Îți place să comunici, să scrii și să explorezi dimensiunea umană a existenței.",
+                    recommendations: [
+                        { title: "Limbi și Literaturi", description: "Filologie, Traduceri, Lingvistică" },
+                        { title: "Comunicare", description: "Jurnalism, Relații Publice, Media" },
+                        { title: "Cultură", description: "Istorie, Filosofie, Teologie" }
+                    ]
+                }
+            };
+            
+            const result = results[dominantCategory];
+            
+            document.getElementById('testContent').style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            document.getElementById('results').classList.add('show');
+            
+            document.getElementById('resultIcon').innerHTML = `<i class="${result.icon}"></i>`;
+            document.getElementById('resultTitle').textContent = result.title;
+            document.getElementById('resultDescription').textContent = result.description;
+            
+            const recommendationsContainer = document.getElementById('recommendations');
+            recommendationsContainer.innerHTML = '';
+            
+            result.recommendations.forEach(rec => {
+                const recElement = document.createElement('div');
+                recElement.className = 'recommendation';
+                recElement.innerHTML = `
+                    <h4>${rec.title}</h4>
+                    <p>${rec.description}</p>
+                `;
+                recommendationsContainer.appendChild(recElement);
+            });
+        }
+
+        // Initialize test when page loads
+        document.addEventListener('DOMContentLoaded', initializeTest);
+    </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despre Noi - UniRunUp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .about-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .story-section {
+            padding: 80px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .story-text h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .story-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .story-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        .mission-section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .mission-card {
+            background-color: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .mission-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .mission-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--bg-primary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background-color: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .member-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .values-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .value-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .value-item h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .value-item p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.jpeg" alt="UniRunUp" class="logo-img">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">UniRunUp</a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Acasă</a></li>
+                <li><a href="despre.html" class="nav-link active">Despre Noi</a></li>
+                <li><a href="functionalitati.html" class="nav-link">Funcționalități</a></li>
+                <li><a href="facultati.html" class="nav-link">Facultăți</a></li>
+                <li><a href="activitati.html" class="nav-link">Activități</a></li>
+                <li><a href="preturi.html" class="nav-link">Prețuri</a></li>
+                <li><a href="UniRunUp-Mobile/index.html" class="nav-link">Versiune Mobilă</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn-secondary">Conectează-te</a>
+                <a href="#" class="btn-primary">Încearcă gratuit</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Povestea UniRunUp</h1>
+            <p>Suntem o echipă de tineri pasionați care cred că fiecare elev merită să-și găsească drumul către facultatea potrivită. Descoperă cum am început și unde ne îndreptăm.</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Cum a început totul</h2>
+                    <p>UniRunUp s-a născut din frustrarea pe care am simțit-o când eram în liceu. Procesul de alegere a facultății părea copleșitor - atâtea opțiuni, atâtea criterii de luat în considerare, și atât de puține resurse care să ne ghideze cu adevărat.</p>
+                    <p>Am realizat că mulți elevi se simt pierduți în această perioadă crucială din viața lor. Unii aleg facultăți doar pentru că părinții le sugerează, alții pentru că prietenii lor merg acolo, iar mulți nici măcar nu știu ce opțiuni au.</p>
+                    <p>Așa că am decis să creăm platforma pe care ne-am fi dorit să o avem când eram în locul lor - un ghid inteligent, personalizat și cuprinzător pentru admiterea la facultate.</p>
+                </div>
+                <div class="story-image">
+                    <svg viewBox="0 0 400 300" class="story-svg">
+                        <defs>
+                            <linearGradient id="storyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Lightbulb idea -->
+                        <circle cx="200" cy="120" r="40" fill="url(#storyGrad)" opacity="0.3"/>
+                        <circle cx="200" cy="120" r="25" fill="#FEF3C7"/>
+                        <rect x="190" y="145" width="20" height="15" fill="#D1D5DB"/>
+                        <rect x="185" y="160" width="30" height="8" fill="#9CA3AF"/>
+                        <!-- Connecting lines -->
+                        <path d="M160 120 Q180 100 200 120" stroke="url(#storyGrad)" stroke-width="3" fill="none"/>
+                        <path d="M240 120 Q220 100 200 120" stroke="url(#storyGrad)" stroke-width="3" fill="none"/>
+                        <!-- Students around -->
+                        <circle cx="120" cy="80" r="15" fill="#3B82F6"/>
+                        <circle cx="280" cy="80" r="15" fill="#10B981"/>
+                        <circle cx="120" cy="200" r="15" fill="#F59E0B"/>
+                        <circle cx="280" cy="200" r="15" fill="#EF4444"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Misiunea noastră</h2>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3>Orientare</h3>
+                    <p>Să ajutăm fiecare elev să-și descopere pasiunile și aptitudinile prin instrumente psihologice validate științific.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Ghidare</h3>
+                    <p>Să oferim un plan personalizat și pas cu pas pentru pregătirea dosarului de admitere la facultatea dorită.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Comunitate</h3>
+                    <p>Să creăm o comunitate de sprijin unde elevii pot învăța unii de la alții și de la studenți cu experiență.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Valorile noastre</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Empatie</h3>
+                    <p>Înțelegem provocările prin care trec elevii și părinții în această perioadă importantă.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Inovație</h3>
+                    <p>Folosim tehnologia pentru a crea soluții moderne la probleme tradiționale din educație.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Transparență</h3>
+                    <p>Oferim informații clare, corecte și actualizate despre toate aspectele admiterii.</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Excelență</h3>
+                    <p>Ne străduim să oferim cea mai bună experiență și cele mai utile resurse pentru elevi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Alătură-te comunității UniRunUp</h2>
+                <p>Fii parte din povestea noastră și lasă-ne să te ajutăm să-ți construiești viitorul</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary large">Începe acum</a>
+                    <a href="functionalitati.html" class="btn-secondary large">Vezi ce oferim</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>UniRunUp</h3>
+                    <p>Platforma care te ghidează către facultatea potrivită pentru tine.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platformă</h4>
+                    <ul>
+                        <li><a href="functionalitati.html">Funcționalități</a></li>
+                        <li><a href="preturi.html">Prețuri</a></li>
+                        <li><a href="facultati.html">Facultăți</a></li>
+                        <li><a href="activitati.html">Activități</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suport</h4>
+                    <ul>
+                        <li><a href="#">Ajutor</a></li>
+                        <li><a href="chat.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Ghiduri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termeni și condiții</a></li>
+                        <li><a href="#">Politica de confidențialitate</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniRunUp. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
